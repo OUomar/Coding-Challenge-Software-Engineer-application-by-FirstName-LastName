@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+//MEs Importations
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,3 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/products', [ProductController::class, 'index']);
+Route::post('/products', [ProductController::class, 'store']);
+Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::post('/add_categories', [CategoryController::class, 'store']);
+Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);

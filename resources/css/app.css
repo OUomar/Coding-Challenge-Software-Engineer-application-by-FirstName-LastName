@@ -1,0 +1,149 @@
+/* Conteneur global */
+div {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* En-têtes */
+  h1, h2 {
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Formulaire de produit */
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  form input,
+  form select,
+  form button {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    
+  }
+  
+  form input[type="file"] {
+    border: none;
+  }
+  
+  form button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  form button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Liste des produits */
+  ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  ul li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 250px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  ul li:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  ul li img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  ul li button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  ul li button:hover {
+    background-color: #d32f2f;
+  }
+  
+  /* Filtres et tri */
+  label {
+    font-size: 1em;
+    color: #333;
+    margin-right: 10px;
+  }
+  
+  select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+  
+  select:focus {
+    border-color: #4CAF50;
+  }
+  
+  /* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pagination button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  .pagination button:hover:enabled {
+    background-color: #45a049;
+  }
+  
+  .pagination span {
+    font-size: 1.2em;
+    color: #333;
+  }
+  
