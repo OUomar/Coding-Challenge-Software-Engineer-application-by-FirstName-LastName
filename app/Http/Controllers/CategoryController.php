@@ -17,9 +17,9 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all(); // Récupérer toutes les catégories
-        \Log::info("reponses: " . json_encode($categories));
-        return response()->json($categories); // Retourner les catégories au format JSON
+        $categories = $this->categoryService->getAllCategories();
+        //\Log::info("reponses: " . json_encode($categories));
+        return response()->json($categories);
     }
 
     public function store(Request $request)

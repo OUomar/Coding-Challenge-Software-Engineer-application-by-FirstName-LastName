@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\CategoryRepository;
+use App\Models\Category;
 
 class CategoryService
 {
@@ -12,6 +13,12 @@ class CategoryService
     public function __construct(CategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
+    }
+
+    // Récupérer toutes les catégories
+    public function getAllCategories()
+    {
+        return Category::all();
     }
 
     //Crée une nouvelle catégorie avec les données fournies
