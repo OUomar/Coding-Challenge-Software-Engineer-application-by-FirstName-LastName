@@ -46,7 +46,6 @@ export default {
     },
   },
   methods: {
-  //Add produit 
     async addProduct() {
       const formData = new FormData();
       formData.append("name", this.newProduct.name);
@@ -57,17 +56,22 @@ export default {
       this.newProduct.categories.forEach((categoryId) => {
         formData.append("categories[]", categoryId); // Ajouter les catégories comme un tableau
       });
-
+      
       try {
+<<<<<<< HEAD
         await axios.post(ROUTES.PRODUCTS, formData);
         this.fetchProducts();
         this.newProduct = { name: "", description: "", price: null, image: null, categories: [] }; // Réinitialiser les catégories
+=======
+        await axios.post(ROUTES.PRODUCTS, formData); // Utiliser la route dynamique
+        this.fetchProducts();
+        this.newProduct = { name: "", description: "", price: null, image: null, categories: [] }; // Réinitialiser le produit
+>>>>>>> 3633ae6da165af22c1a7f9dd4e4fce4c2c552e76
       } catch (error) {
         console.error("Erreur lors de l'ajout du produit :", error.response.data);
         alert("Erreur lors de l'ajout du produit : " + (error.response.data.message || "Veuillez réessayer."));
       }
     },
-    //display produit 
     async fetchProducts() {
       try {
         const response = await axios.get(ROUTES.PRODUCTS, {
@@ -82,23 +86,30 @@ export default {
         this.products = response.data.data;
         this.totalItems = response.data.total;
       } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Erreur lors de la récupération des produits :", error);
       }
     },
-     //display categories 
     async fetchCategories() {
       try {
+<<<<<<< HEAD
         const response = await axios.get(ROUTES.CATEGORIES);
         console.log(response);
+=======
+        const response = await axios.get(ROUTES.CATEGORIES); // Utiliser la route dynamique
+>>>>>>> 3633ae6da165af22c1a7f9dd4e4fce4c2c552e76
         this.allCategories = response.data;
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Erreur lors de la récupération des catégories :", error);
       }
     },
-     //delete produit 
     async deleteProduct(id) {
+<<<<<<< HEAD
       if (confirm("Êtes-vous sûr de vouloir supprimer ce produit?")) {
         await axios.delete(`${ROUTES.PRODUCTS}/${id}`);
+=======
+      if (confirm("Êtes-vous sûr de vouloir supprimer ce produit ?")) {
+        await axios.delete(`${ROUTES.PRODUCTS}/${id}`); // Utiliser la route dynamique
+>>>>>>> 3633ae6da165af22c1a7f9dd4e4fce4c2c552e76
         this.fetchProducts();
       }
     },
@@ -131,26 +142,28 @@ export default {
   },
 };
 </script>
+
 <template>
   <div>
     <h1>Gestion des Produits</h1>
     <form @submit.prevent="addProduct" class="product-form">
-            <input v-model="newProduct.name"  class="custom-input" placeholder="Nom du produit" required />
-            <input v-model="newProduct.description" class="custom-input" placeholder="Description" />
-            <input v-model="newProduct.price" type="number" class="custom-input" placeholder="Prix" required />
-            <input type="file"  class="product-name-input" @change="onFileChange" />
-             <select v-model="newProduct.categories" multiple>
-                <option v-for="category in allCategories" :key="category.id" :value="category.id">{{ category.name }}</option>
-            </select>
-            <button type="submit" class="custom-btn">Ajouter Produit</button>
+      <input v-model="newProduct.name" class="custom-input" placeholder="Nom du produit" required />
+      <input v-model="newProduct.description" class="custom-input" placeholder="Description" />
+      <input v-model="newProduct.price" type="number" class="custom-input" placeholder="Prix" required />
+      <input type="file" class="product-name-input" @change="onFileChange" />
+      <select v-model="newProduct.categories" multiple>
+        <option v-for="category in allCategories" :key="category.id" :value="category.id">{{ category.name }}</option>
+      </select>
+      <button type="submit" class="custom-btn">Ajouter Produit</button>
     </form>
+    
     <h2>Liste des Produits</h2>
-    <!-- Ajout d'un filtre par catégorie -->
     <label for="categoryFilter">Filtrer par catégorie :</label>
     <select v-model="categoryFilter" @change="fetchProducts">
       <option value="">Tous</option>
       <option v-for="category in allCategories" :key="category.id" :value="category.id">{{ category.name }}</option>
     </select>
+    
     <div>
       <label for="sort">Trier par :</label>
       <select v-model="sortBy">
@@ -162,6 +175,7 @@ export default {
         <option value="desc">Descendant</option>
       </select>
     </div>
+    
     <ul>
       <li v-for="product in paginatedProducts" :key="product.id">
         <img v-if="product.image_url" :src="product.image_url" alt="Image du produit" />
@@ -169,15 +183,17 @@ export default {
         <button @click="deleteProduct(product.id)">Supprimer</button>
       </li>
     </ul>
+    
     <div class="pagination">
       <button @click="prevPage" :disabled="currentPage === 1">Précédent</button>
       <span>Page {{ currentPage }} sur {{ totalPages }}</span>
       <button @click="nextPage" :disabled="currentPage === totalPages">Suivant</button>
     </div>
-    <!-- Modal pour afficher les détails du produit -->
+    
     <Modal v-if="showModal" :show="showModal" :product="selectedProduct" @close="closeModal" />
   </div>
 </template>
+
 
 
 

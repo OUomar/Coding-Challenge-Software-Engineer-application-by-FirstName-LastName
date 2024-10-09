@@ -16,8 +16,14 @@ class CategoryController extends Controller
 
     public function index():JsonResponse
     {
+<<<<<<< HEAD
         $categories = $this->categoryService->getAllCategories(); 
         return response()->json($categories); 
+=======
+        $categories = $this->categoryService->getAllCategories();
+        //\Log::info("reponses: " . json_encode($categories));
+        return response()->json($categories);
+>>>>>>> 3633ae6da165af22c1a7f9dd4e4fce4c2c552e76
     }
 
     public function store(Request $request):JsonResponse

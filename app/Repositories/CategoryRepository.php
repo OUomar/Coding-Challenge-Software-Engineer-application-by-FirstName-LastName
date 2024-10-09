@@ -1,28 +1,26 @@
 <?php
 namespace App\Repositories;
 use App\Models\Category;
-use Illuminate\Database\Eloquent\Collection;
-
 
 class CategoryRepository
 {
-    public function create(array $data):Category
+    public function create(array $data)
     {
         return Category::create($data);
     }
 
-    public function delete(int $id):void
+    public function delete(int $id)
     {
         $category = Category::findOrFail($id);
         $category->delete();
     }
 
-    public function findAll():Collection
+    public function findAll()
     {
         return Category::all();
     }
 
-    public function findById(int $id):Category
+    public function findById(int $id)
     {
         return Category::findOrFail($id);
     }

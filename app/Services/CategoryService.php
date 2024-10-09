@@ -4,7 +4,10 @@ namespace App\Services;
 
 use App\Repositories\CategoryRepository;
 use App\Models\Category;
+<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Collection;
+=======
+>>>>>>> 3633ae6da165af22c1a7f9dd4e4fce4c2c552e76
 
 class CategoryService
 {
@@ -17,9 +20,15 @@ class CategoryService
     }
 
     // Récupérer toutes les catégories
+<<<<<<< HEAD
     public function getAllCategories():Collection
     {
         return $this->categoryRepository->findAll();
+=======
+    public function getAllCategories()
+    {
+        return Category::all();
+>>>>>>> 3633ae6da165af22c1a7f9dd4e4fce4c2c552e76
     }
 
     //Crée une nouvelle catégorie avec les données fournies
