@@ -27,5 +27,5 @@ Route::post('/products', [ProductController::class, 'store']);
 Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
 Route::get('/categories', [CategoryController::class, 'index']);
-Route::post('/add_categories', [CategoryController::class, 'store']);
+Route::post('/categories', [CategoryController::class, 'store']);
 Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);

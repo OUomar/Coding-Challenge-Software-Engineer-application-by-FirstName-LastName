@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Repositories\ProductRepository;
+use Illuminate\Database\Eloquent\Collection;
 use App\Models\Product;
 
 class ProductService
@@ -14,8 +15,13 @@ class ProductService
         $this->productRepository = $productRepository;
     }
 
+    public function get_All_Products(string $sortBy, string $sortOrder, int $perPage, int $page, ?int $categoryId)
+    {
+        return $this->productRepository->getProducts( $sortBy,  $sortOrder,$perPage, $page,$categoryId);
+    }
+
     // Crée un nouveau produit et gère l'upload d'image
-    public function createProduct($data)
+    public function createProduct($data):Product
     {
         // Créer le produit
         $product = Product::create($data);
@@ -27,29 +33,29 @@ class ProductService
             $product->save();
         }
 
-        return $product; // Retourner l'objet Product créé
+        return $product; 
     }
 
     // Supprime un produit par son ID
-    public function deleteProduct(int $id)
+    public function deleteProduct(int $id):void
     {
         $this->productRepository->delete($id);
     }
 
     // Liste tous les produits
-    public function listProducts()
+    public function listProducts():Collection
     {
         return $this->productRepository->findAll();
     }
 
     // Récupère un produit par son ID
-    public function getProduct(int $id)
+    public function getProduct(int $id):Product
     {
         return $this->productRepository->findById($id);
     }
 
     // Met à jour un produit avec de nouvelles données
-    public function updateProduct(int $id, array $data)
+    public function updateProduct(int $id, array $data):Product
     {
         return $this->productRepository->update($id, $data);
     }

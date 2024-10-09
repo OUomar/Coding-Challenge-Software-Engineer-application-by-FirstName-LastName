@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+import { ROUTES } from '@/router/routes.js';
 
 export default {
   data() {
@@ -12,16 +13,16 @@ export default {
   },
   methods: {
     async addCategory() {
-      await axios.post("/api/add_categories", this.newCategory);
+      await axios.post(ROUTES.CATEGORIES, this.newCategory);
       this.fetchCategories();
       this.newCategory.name = "";
     },
     async fetchCategories() {
-      const response = await axios.get("/api/categories");
+      const response = await axios.get(ROUTES.CATEGORIES);
       this.categories = response.data;
     },
     async deleteCategory(id) {
-      await axios.delete(`/api/categories/${id}`);
+      await axios.delete(`${ROUTES.CATEGORIES}/${id}`);
       this.fetchCategories();
     },
   },

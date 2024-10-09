@@ -1,6 +1,7 @@
 <script>
 import axios from "axios";
 import Modal from '../Modal.vue';
+import { ROUTES } from '@/router/routes.js';
 
 export default {
   components: {
@@ -58,9 +59,9 @@ export default {
       });
 
       try {
-        await axios.post("/api/products", formData);
+        await axios.post(ROUTES.PRODUCTS, formData);
         this.fetchProducts();
-        this.newProduct = { name: "", description: "", price: null, image: "", categories: [] }; // Réinitialiser les catégories
+        this.newProduct = { name: "", description: "", price: null, image: null, categories: [] }; // Réinitialiser les catégories
       } catch (error) {
         console.error("Erreur lors de l'ajout du produit :", error.response.data);
         alert("Erreur lors de l'ajout du produit : " + (error.response.data.message || "Veuillez réessayer."));
@@ -69,13 +70,13 @@ export default {
     //display produit 
     async fetchProducts() {
       try {
-        const response = await axios.get("/api/products", {
+        const response = await axios.get(ROUTES.PRODUCTS, {
           params: {
             sort_by: this.sortBy,
             sort_order: this.sortOrder,
             page: this.currentPage,
             per_page: this.itemsPerPage,
-            category_id: this.categoryFilter, // Ajouter le filtre par catégorie
+            category_id: this.categoryFilter, 
           },
         });
         this.products = response.data.data;
@@ -87,7 +88,8 @@ export default {
      //display categories 
     async fetchCategories() {
       try {
-        const response = await axios.get("/api/categories");
+        const response = await axios.get(ROUTES.CATEGORIES);
+        console.log(response);
         this.allCategories = response.data;
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -96,7 +98,7 @@ export default {
      //delete produit 
     async deleteProduct(id) {
       if (confirm("Êtes-vous sûr de vouloir supprimer ce produit?")) {
-        await axios.delete(`/api/products/${id}`);
+        await axios.delete(`${ROUTES.PRODUCTS}/${id}`);
         this.fetchProducts();
       }
     },
