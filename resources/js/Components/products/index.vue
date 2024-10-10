@@ -32,15 +32,6 @@ export default {
     };
   },
   computed: {
-    paginatedProducts() {
-      const start = (this.currentPage - 1) * this.itemsPerPage;
-      return this.products
-        .sort((a, b) => {
-          const modifier = this.sortOrder === "asc" ? 1 : -1;
-          return a[this.sortBy] > b[this.sortBy] ? modifier : -modifier;
-        })
-        .slice(start, start + this.itemsPerPage);
-    },
     totalPages() {
       return Math.ceil(this.totalItems / this.itemsPerPage);
     },
@@ -58,15 +49,9 @@ export default {
       });
       
       try {
-<<<<<<< HEAD
         await axios.post(ROUTES.PRODUCTS, formData);
         this.fetchProducts();
         this.newProduct = { name: "", description: "", price: null, image: null, categories: [] }; // Réinitialiser les catégories
-=======
-        await axios.post(ROUTES.PRODUCTS, formData); // Utiliser la route dynamique
-        this.fetchProducts();
-        this.newProduct = { name: "", description: "", price: null, image: null, categories: [] }; // Réinitialiser le produit
->>>>>>> 3633ae6da165af22c1a7f9dd4e4fce4c2c552e76
       } catch (error) {
         console.error("Erreur lors de l'ajout du produit :", error.response.data);
         alert("Erreur lors de l'ajout du produit : " + (error.response.data.message || "Veuillez réessayer."));
@@ -91,25 +76,16 @@ export default {
     },
     async fetchCategories() {
       try {
-<<<<<<< HEAD
         const response = await axios.get(ROUTES.CATEGORIES);
         console.log(response);
-=======
-        const response = await axios.get(ROUTES.CATEGORIES); // Utiliser la route dynamique
->>>>>>> 3633ae6da165af22c1a7f9dd4e4fce4c2c552e76
         this.allCategories = response.data;
       } catch (error) {
         console.error("Erreur lors de la récupération des catégories :", error);
       }
     },
     async deleteProduct(id) {
-<<<<<<< HEAD
       if (confirm("Êtes-vous sûr de vouloir supprimer ce produit?")) {
         await axios.delete(`${ROUTES.PRODUCTS}/${id}`);
-=======
-      if (confirm("Êtes-vous sûr de vouloir supprimer ce produit ?")) {
-        await axios.delete(`${ROUTES.PRODUCTS}/${id}`); // Utiliser la route dynamique
->>>>>>> 3633ae6da165af22c1a7f9dd4e4fce4c2c552e76
         this.fetchProducts();
       }
     },
@@ -177,7 +153,7 @@ export default {
     </div>
     
     <ul>
-      <li v-for="product in paginatedProducts" :key="product.id">
+      <li v-for="product in products" :key="product.id">
         <img v-if="product.image_url" :src="product.image_url" alt="Image du produit" />
         <span @click="openModal(product)">{{ product.name }} - {{ product.price }} €</span>
         <button @click="deleteProduct(product.id)">Supprimer</button>
@@ -193,9 +169,6 @@ export default {
     <Modal v-if="showModal" :show="showModal" :product="selectedProduct" @close="closeModal" />
   </div>
 </template>
-
-
-
 
 <style scoped>
 .pagination {

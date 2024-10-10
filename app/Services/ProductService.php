@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Repositories\ProductRepository;
 use Illuminate\Database\Eloquent\Collection;
 use App\Models\Product;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ProductService
 {
@@ -15,7 +16,7 @@ class ProductService
         $this->productRepository = $productRepository;
     }
 
-    public function get_All_Products(string $sortBy, string $sortOrder, int $perPage, int $page, ?int $categoryId)
+    public function get_All_Products(string $sortBy, string $sortOrder, int $perPage, int $page, ?int $categoryId): LengthAwarePaginator
     {
         return $this->productRepository->getProducts( $sortBy,  $sortOrder,$perPage, $page,$categoryId);
     }

@@ -4,15 +4,16 @@ namespace App\Repositories;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ProductRepository
 {
-    public function create(array $data)
+    public function create(array $data):Product
     {
         return Product::create($data);
     }
 
-    public function getProducts(string $sortBy, string $sortOrder, int $perPage, int $page, ?int $categoryId)
+    public function getProducts(string $sortBy, string $sortOrder, int $perPage, int $page, ?int $categoryId): LengthAwarePaginator
     {
         $query = Product::query();
 
